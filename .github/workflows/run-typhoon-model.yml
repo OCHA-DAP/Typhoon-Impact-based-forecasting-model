@@ -31,8 +31,7 @@ jobs:
           libspatialindex-dev \
           libudunits2-dev \
           libssl-dev \
-          libgdal-dev \
-        sudo rm -rf /var/lib/apt/lists/*
+          libgdal-dev
 
     - name: Install R dependencies
       run: |
