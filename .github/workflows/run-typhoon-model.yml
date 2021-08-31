@@ -23,8 +23,8 @@ jobs:
 
     - name: Install system dependencies
       run: |
-        apt-get update
-        apt-get install -y \
+        sudo apt-get update
+        sudo apt-get install -y \
           python3-eccodes \
           libproj-dev \
           libgeos-dev \
@@ -32,7 +32,7 @@ jobs:
           libudunits2-dev \
           libssl-dev \
           libgdal-dev \
-        rm -rf /var/lib/apt/lists/*
+        sudo rm -rf /var/lib/apt/lists/*
 
     - name: Install R dependencies
       run: |
