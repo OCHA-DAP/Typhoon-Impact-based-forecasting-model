@@ -10,10 +10,17 @@ jobs:
       running-directory: ./IBF-Typhoon-model
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Python 3.x
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+
+    - name: Set up R
+      uses: r-lib/actions/setup-r@master
+      with:
+        r-version: 4.1
+
     - name: Install system dependencies
       run: |
         apt-get update
@@ -26,14 +33,23 @@ jobs:
           libssl-dev \
           libgdal-dev \
         rm -rf /var/lib/apt/lists/*
+
+    - name: Install R dependencies
+      run: |
+        Rscript -e \
+          "install.packages(c('tmap', 'dplyr', 'tidyr', 'sf', 'geojsonsf', 'raster', \
+          'rlang', 'lubridate', 'ncdf4', 'xgboost', 'huxtable', 'readr'))"
+
     - name: Install Python dependencies
       run: |
         python -m pip install --no-cache-dir --upgrade pip
         python -m pip install --no-cache-dir -r requirements.txt
+
     - name: Install script
       run: |
         python -m pip install .
       working-directory: ${{ env.running-directory }}
+
     - name: Run script
       env:
         EMAIL_TO_LIST: ${{ secrets.EMAIL_TO_LIST }}
@@ -48,6 +64,7 @@ jobs:
       run: |
         run-typhoon-model
       working-directory: ${{ env.running-directory }}
+
     - name: Send mail
       if: failure()
       uses: dawidd6/action-send-mail@v2
