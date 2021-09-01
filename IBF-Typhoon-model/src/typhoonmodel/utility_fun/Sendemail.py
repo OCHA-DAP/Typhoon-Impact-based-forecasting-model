@@ -37,7 +37,8 @@ def sendemail(smtp_server: str,
 
     # Open SSL connection and send the email
     context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(smtp_server, smtp_port, context=context) as server:
+    with smtplib.SMTP(smtp_server, smtp_port) as server:
+        server.starttls(context=context)
         server.login(email_username, email_password)
         server.sendmail(from_address,
                         to_address_list + cc_address_list,
