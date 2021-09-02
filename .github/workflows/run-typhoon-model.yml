@@ -61,7 +61,7 @@ jobs:
         SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
         SMTP_PORT: ${{ secrets.SMTP_PORT }}
         AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
-        AZURE_CONNECTION_STRING: ${{ secrets.AZURE_CONNECTION_STRING }}
+        AZURE_CONNECTING_STRING: ${{ secrets.AZURE_CONNECTING_STRING }}
       run: |
         run-typhoon-model --debug
       working-directory: ${{ env.running-directory }}
