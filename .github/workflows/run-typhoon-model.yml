@@ -61,7 +61,7 @@ jobs:
         SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
         SMTP_PORT: ${{ secrets.SMTP_PORT }}
       run: |
-        run-typhoon-model
+        run-typhoon-model --debug
       working-directory: ${{ env.running-directory }}
 
     - name: Send mail
