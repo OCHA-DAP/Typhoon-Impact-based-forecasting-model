@@ -63,7 +63,7 @@ jobs:
         AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
         AZURE_CONNECTING_STRING: ${{ secrets.AZURE_CONNECTING_STRING }}
       run: |
-        run-typhoon-model --debug
+        run-typhoon-model
       working-directory: ${{ env.running-directory }}
 
     - name: Send mail
