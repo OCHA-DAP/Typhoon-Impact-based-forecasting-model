@@ -34,7 +34,10 @@ jobs:
           libgdal-dev
 
     - name: Install R dependencies
-      uses: r-lib/actions/setup-r-dependencies@v1
+      run: |
+        Rscript -e \
+          "install.packages(c('tmap', 'dplyr', 'tidyr', 'sf', 'geojsonsf', 'raster', \
+          'rlang', 'lubridate', 'ncdf4', 'xgboost', 'huxtable', 'readr'))"
 
     - name: Install Python dependencies
       run: |
