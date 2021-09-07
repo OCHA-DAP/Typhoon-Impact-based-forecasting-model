@@ -1,7 +1,12 @@
 name: run-typhoon-model
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      typhoon_name:
+        description: Custom typhoon name
+        required: False
+        default: ''
 
 jobs:
   run-typhoon-model:
