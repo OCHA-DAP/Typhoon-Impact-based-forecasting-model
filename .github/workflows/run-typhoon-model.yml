@@ -5,8 +5,10 @@ on:
     inputs:
       typhoon_name:
         description: Custom typhoon name
-        required: False
-        default: ''
+        required: True
+      remote_directory:
+        description: ECMWF timestamp directory, format YYYYMMDDhhmmss
+        required: True
 
 jobs:
   run-typhoon-model:
@@ -74,7 +76,9 @@ jobs:
         AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
         AZURE_CONNECTING_STRING: ${{ secrets.AZURE_CONNECTING_STRING }}
       run: |
-        run-typhoon-model --typhoonname ${{ github.event.inputs.typhoon_name }}
+        run-typhoon-model \
+        --typhoonname ${{ github.event.inputs.typhoon_name }} \
+        --remote_directory ${{ github.event.inputs.remote_directory }}
       working-directory: ${{ env.running-directory }}
 
     - name: Send mail
