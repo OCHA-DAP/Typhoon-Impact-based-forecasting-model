@@ -76,16 +76,8 @@ jobs:
         python -m pip install .
       working-directory: ${{ env.running-directory }}
 
-    - name: Run script, no input
-      if: ${{ github.events.inputs.typhoon_name == 'Not set' }} && \
-          ${{ github.events.inputs.remote_directory == 'Not set' }}
-      run: |
-        run-typhoon-model
-      working-directory: ${{ env.running-directory }}
-
     - name: Run script, typhoon name and remote directory input
-      if: ${{ github.events.inputs.typhoon_name != 'Not set' }} && \
-          ${{ github.events.inputs.remote_directory != 'Not set' }}
+      if: ${{ github.events.inputs.typhoon_name != 'Not set' && github.events.inputs.remote_directory != 'Not set' }}
       run: |
         run-typhoon-model \
         --typhoonname ${{ github.event.inputs.typhoon_name }} \
@@ -93,19 +85,23 @@ jobs:
       working-directory: ${{ env.running-directory }}
 
     - name: Run script, typhoon name input
-      if: ${{ github.events.inputs.typhoon_name != 'Not set' }} && \
-          ${{ github.events.inputs.remote_directory == 'Not set' }}
+      if: ${{ github.events.inputs.typhoon_name != 'Not set' && github.events.inputs.remote_directory == 'Not set' }}
       run: |
         run-typhoon-model \
         --typhoonname ${{ github.event.inputs.typhoon_name }}
       working-directory: ${{ env.running-directory }}
 
     - name: Run script, remote directory input
-      if: ${{ github.events.inputs.typhoon_name == 'Not set' }} && \
-        ${{ github.events.inputs.remote_directory != 'Not set' }}
+      if: ${{ github.events.inputs.typhoon_name == 'Not set' && github.events.inputs.remote_directory != 'Not set' }}
       run: |
         run-typhoon-model \
         --remote_directory ${{ github.event.inputs.remote_directory }}
+      working-directory: ${{ env.running-directory }}
+
+    - name: Run script, no input
+      if: ${{ github.events.inputs.typhoon_name == 'Not set' && github.events.inputs.remote_directory == 'Not set' }}
+      run: |
+        run-typhoon-model
       working-directory: ${{ env.running-directory }}
 
     - name: Send mail
