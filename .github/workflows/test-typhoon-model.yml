@@ -1,11 +1,11 @@
-name: run-typhoon-model
+name: test-typhoon-model
 
 on:
   schedule:
     - cron: '0 0 * * *'
 
 jobs:
-  run-typhoon-model:
+  test-typhoon-model:
     runs-on: ubuntu-latest
     env:
       running-directory: ./IBF-Typhoon-model
