@@ -98,7 +98,8 @@ class Forecast:
         cent = Centroids()
         cent.set_raster_from_pnt_bounds((118,6,127,19), res=0.05)
         cent.check()
-        cent.plot()
+        # TODO: put this back once pyEPSG is fixed
+        # cent.plot()
         admin=gpd.read_file(os.path.join(self.main_path,"./data-raw/phl_admin3_simpl2.geojson"))
         df = pd.DataFrame(data=cent.coord)
         df["centroid_id"] = "id"+(df.index).astype(str)  
